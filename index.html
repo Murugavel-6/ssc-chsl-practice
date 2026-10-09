@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SSC CHSL 2024 Tier I – Practice Paper</title>
+<style>
+:root{--blue:#1e3a8a;--bg:#f1f5f9;--ok:#15803d;--bad:#b91c1c;--line:#e2e8f0}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Segoe UI",Arial,sans-serif;background:var(--bg);color:#0f172a;line-height:1.5}
+header{background:var(--blue);color:#fff;padding:14px 16px;position:sticky;top:0;z-index:10;box-shadow:0 2px 6px #0003}
+header h1{margin:0;font-size:1.05rem}
+header .sub{font-size:.8rem;opacity:.85}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:8px}
+.bar button,.tabs button{font:inherit;cursor:pointer}
+.btn{background:#fff;color:var(--blue);border:0;border-radius:6px;padding:6px 12px;font-weight:600;font-size:.85rem}
+.btn.on{background:#fbbf24;color:#111}
+.btn.go{background:#16a34a;color:#fff}
+#timer{margin-left:auto;font-weight:700;font-variant-numeric:tabular-nums}
+main{max-width:860px;margin:0 auto;padding:12px}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px}
+.tabs button{white-space:nowrap;border:1px solid var(--line);background:#fff;border-radius:20px;padding:6px 14px;font-size:.85rem}
+.tabs button.act{background:var(--blue);color:#fff;border-color:var(--blue)}
+.pal{display:flex;flex-wrap:wrap;gap:5px;margin:10px 0;background:#fff;padding:10px;border-radius:10px;border:1px solid var(--line)}
+.pal a{width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:6px;border:1px solid #cbd5e1;font-size:.8rem;text-decoration:none;color:#0f172a;background:#fff}
+.pal a.sel{background:#dbeafe;border-color:#60a5fa}
+.pal a.c{background:#dcfce7;border-color:#22c55e}
+.pal a.w{background:#fee2e2;border-color:#ef4444}
+.card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:10px 0}
+.qn{font-weight:700;color:var(--blue);font-size:.85rem}
+.qt{font-weight:600;margin:2px 0 8px}
+.note{font-size:.85rem;color:#475569;font-style:italic;margin-bottom:8px}
+.passage{background:#f8fafc;border-left:4px solid #64748b;padding:8px 12px;font-style:italic;border-radius:4px;margin:12px 0 0}
+.opt{display:block;width:100%;text-align:left;font:inherit;background:#fff;border:1px solid #cbd5e1;border-radius:8px;padding:8px 10px;margin:5px 0;cursor:pointer}
+.opt:hover{background:#f8fafc}
+.opt.sel{background:#dbeafe;border-color:#3b82f6}
+.opt.right{background:#dcfce7;border-color:#22c55e}
+.opt.wrong{background:#fee2e2;border-color:#ef4444}
+.opt:disabled{cursor:default}
+.res{font-size:.85rem;font-weight:700;margin-top:6px}
+.res.ok{color:var(--ok)}.res.no{color:var(--bad)}
+table{width:100%;border-collapse:collapse;font-size:.8rem;margin:6px 0}
+th,td{border:1px solid #94a3b8;padding:4px 6px;text-align:center}th{background:#f1f5f9}
+.score{background:#fff;border:2px solid var(--blue);border-radius:12px;padding:14px;margin:10px 0}
+.score h2{margin:0 0 8px;color:var(--blue)}
+.score table td,.score table th{padding:6px}
+.warn{font-size:.8rem;background:#fffbeb;border:1px dashed #b45309;color:#92400e;border-radius:8px;padding:8px 10px;margin:10px 0}
+.nav{display:flex;justify-content:space-between;margin:14px 0 30px}
+footer{text-align:center;font-size:.75rem;color:#64748b;padding:16px}
+@media print{header .bar,.tabs,.pal,.nav,.warn{display:none}header{position:static;box-shadow:none}.card{page-break-inside:avoid}}
+</style>
+</head>
+<body>
+<header>
+  <h1>SSC CHSL 2024 Tier I – Practice Paper</h1>
+  <div class="sub">Exam date 01/07/2024 · 9:00–10:00 AM · 100 questions</div>
+  <div class="bar">
+    <button class="btn on" id="bStudy" onclick="setMode('study')">Study mode</button>
+    <button class="btn" id="bTest" onclick="setMode('test')">Test mode (60 min)</button>
+    <button class="btn go" id="bSub" onclick="submitTest()" style="display:none">Submit</button>
+    <button class="btn" onclick="window.print()">Print / PDF</button>
+    <span id="timer"></span>
+  </div>
+</header>
+<main>
+  <div class="tabs" id="tabs"></div>
+  <div id="score"></div>
+  <div class="pal" id="pal"></div>
+  <div id="qs"></div>
+  <div class="nav"><button class="btn" style="background:var(--blue);color:#fff" onclick="go(-1)">← Previous section</button><button class="btn" style="background:var(--blue);color:#fff" onclick="go(1)">Next section →</button></div>
+  <div class="warn">Note: some answers in the source key appear inconsistent with the question text as transcribed (e.g. Quant Q1, Q2, Q3, Q20, Q21, Q25). Verify against the official key. Figure-based questions are shown as text placeholders.</div>
+</main>
+<footer>Practice use only. Marking: +2 correct, −0.5 wrong.</footer>
+
+<script>
+var S = [];
+S.push({title:"English Language", qs:[
+["Identify the segment that contains a grammatical error.<br>Passengers started behaving / violent when / they were asked / to leave the bus station.",["to leave the bus station","Passengers started behaving","violent when","they were asked"],"C"],
+["Identify the segment that contains a grammatical error.<br>The couple / preferred to walk / until the last house / of the town.",["The couple","preferred to walk","of the town","until the last house"],"D"],
+["Select the sentence in the future tense.",["I will be barely five next Sunday.","I have been barely five next Sunday.","I should be barely five next Sunday.","I could be barely five next Sunday."],"A"],
+["The underlined phrase has been used incorrectly. Select the option that can correctly replace it.<br>I am <u>done with</u> her complaints.",["passed out with","fed up with","held down with","boiled down with"],"B"],
+["Select the most appropriate option to fill in blank no. 1.",["eating","churning","feeding","grazing"],"A","",
+ "<strong>Comprehension (Q.5 – Q.9):</strong> In the following passage, some words have been deleted. Select the most appropriate option to fill in each blank.<br>As Paul was (1)______ his supper, Aunt Jenny (2)______ him questions that have been full of deceit... and had a very deep meaning, for she wanted to trap him. It seemed as if she was endowed with a (3)______ which could hunt for dark and mysterious fact. She asked, “Did you now not want to swim, Paul?” Paul felt an uncomfortable (4)______. He (5)______ Aunt Jenny's face; however it informed him nothing. So, he said, “No, ma'am.”"],
+["Select the most appropriate option to fill in blank no. 2.",["demanded","allowed","submitted","asked"],"D"],
+["Select the most appropriate option to fill in blank no. 3.",["technique","purpose","talent","weakness"],"C"],
+["Select the most appropriate option to fill in blank no. 4.",["drip","suspicion","view","gaze"],"B"],
+["Select the most appropriate option to fill in blank no. 5.",["chased","raffled","scanned","perused"],"C"],
+["Select the option that can substitute the underlined segment.<br><u>This is best book</u> for children to read.",["This is the best book","This is good book","This is very good book","This is very best book"],"A"],
+["Select the most appropriate meaning of the underlined idiom.<br>The copies of the new system <u>sold quite like hot cakes</u>.",["Sold immediately","Sold quickly and in large numbers","Sold illegally","Sold with great difficulty"],"B"],
+["Select the most appropriate meaning of the given idiom.<br>Black and white",["In dispute","A false invention","In writing","Doubtful"],"C"],
+["Select the most appropriate ANTONYM of the given word.<br>Glory",["Shame","Honour","Delight","Gluttony"],"A"],
+["Select the option that can substitute the underlined segment.<br>The skunk had a <u>conspicuous</u> optical stripe.",["obscure","charming","noticeable","faint"],"C"],
+["Select the most appropriate ANTONYM of the underlined word.<br>Would you please <u>support</u> me for once in your life?",["establish","refute","document","declaim"],"B"],
+["Select the most appropriate ANTONYM of the given word.<br>Trivial",["Vain","Essential","Usable","Lavish"],"B"],
+["Select the INCORRECTLY spelt word.",["Cronoch","Delegate","Illusion","Obtain"],"A"],
+["Select the option that can substitute the underlined segment.<br>Rahul had <u>strong</u> pain in his stomach.",["severe","high","deep","strict"],"A"],
+["Select the most appropriate ANTONYM of the underlined word.<br>How can you be so <u>jealous</u> on hearing the news?",["Beaming","Rapt","Blissful","Dubious"],"C"],
+["Select the most appropriate option to fill in the blank.<br>In both countries we have leaders of ______ ability.",["powerful","almighty","compelling","exceptional"],"D"],
+["Identify the segment that contains a spelling error.<br>I begged him / to reconsideir / the decision but / he refused to yield.",["the decision but","I begged him","he refused to yield","to reconsideir"],"D"],
+["Select the option that can substitute the underlined words.<br>It is a general belief that the female ostrich <u>guard the nest at night</u>.",["guarded the nest at night","guards the nest at night","does guard the nest in night","is guarding the nest at night"],"B"],
+["Select the most appropriate option to fill in the blank.<br>Yesterday, I ate only a ______ of apples for my dinner.",["pair","pier","pare","peer"],"A"],
+["Select the most appropriate synonym of the bracketed word to fill in the blank.<br>The documentary explored the historical and cultural significance of the ______ (antique) ruins in the region.",["obsolete","contemporary","modern","ancient"],"D"],
+["Select the option that can substitute the underlined segment. If no substitution is needed, select ‘No substitution required’.<br>The little boy cried with pain <u>when he burnt</u> his fingers.",["No substitution required","when he burns his fingers","while he burn his fingers","as for burning his fingers"],"A"]
+]});
+
+S.push({title:"General Intelligence", qs:[
+["Select the set in which the numbers are related in the same way as the numbers of the following sets.<br>(45, 9, 36) and (78, 7, 30)",["(44, 8, 30)","(112, 11, 44)","(52, 11, 44)","(24, 15, 72)"],"B","NOTE: Operations should be performed on the whole numbers, without breaking them into constituent digits."],
+["Identify the figure that, put in place of the question mark (?), will logically complete the series.",["Option A","Option B","Option C","Option D"],"A","[Figure-based question: series of 4 boxed frames with shifting letter/geometric elements (L, 2, triangle, m, rectangle). Figure not reproduced.]"],
+["Select the correct mirror image of the given figure when the mirror is placed at MN.<br>Given: c R 4 N t Q",["Option A","Option B","Option C","Option D"],"A","[Figure-based question: vertical mirror MN on the right. Figure not reproduced.]"],
+["Select the combination of letters that, placed sequentially in the blanks, will complete the pattern.<br>R _ N _ C O R _ N B _ O C O R _ N _ C",["B, C, R, C, B","O, B, N, R, N","O, B, C, R, B","B, B, N, R, N"],"C"],
+["DGS is related to ECG in a certain way based on English alphabetical order. In the same way, NKT is related to AGHK. To which of the following is CBML related following the same logic?",["QPOT","QRST","QROU","SQOU"],"B"],
+["If ‘+’ stands for ‘−’, ‘−’ stands for ‘×’, ‘×’ stands for ‘÷’ and ‘÷’ stands for ‘+’, what will come in place of ‘?’<br>54 ÷ 18 − 45 × 15 + 14 = ?",["94","108","76","100"],"A"],
+["What should come in place of ‘?’ in the series?<br>119, 120, 124, 133, 149, ?",["172","174","175","176"],"B"],
+["The position of how many letters will remain unchanged if each letter of the word PREFACE is arranged in alphabetical order from left to right?",["None","One","Two","More than three"],"B"],
+["Which two numbers should be interchanged to make the equation correct?<br>76 − 32 + 23 × 16 ÷ 4 = 120",["32 and 16","76 and 23","76 and 16","32 and 23"],"D","NOTE: Interchange whole numbers, not constituent digits."],
+["If the year is NOT a leap year, then how is the last day of the year related to the first day of the same year?",["First day is Tuesday, last day is Friday","First day is Sunday, last day is Saturday","First day is Tuesday, last day is Tuesday","First day is Sunday, last day is Tuesday"],"C"],
+["What should come in place of ‘?’ in the series based on English alphabetical order?<br>PNV, LUZ, ?, HDH, DBL",["HQZ","HRD","IRF","IRD"],"B"],
+["What would be the letter on the opposite side of ‘U’ if the given sheet is folded to form a cube?",["Z","V","X","W"],"B","[Net of cube: top column Z, U; attached T, V; then W, X hanging. Figure not reproduced.]"],
+["Six symbols 1, 2, 3, 4, 5 and 6 are written on different faces of a dice. Two positions are shown. Which number is on the face opposite to 2?",["1","3","5","6"],"C","[Figure showing two positions of the dice not reproduced.]"],
+["16 is related to 12 following a certain logic. Following the same logic, 100 is related to 84. To which is 64 related?",["52","50","48","46"],"A","NOTE: Operations should be performed on whole numbers, not constituent digits."],
+["What should come in place of ‘?’ in the series?<br>10, 7, 12, 4, 14, 0, ?",["20","21","19","16"],"D"],
+["‘A + B’ means ‘A is the brother of B’; ‘A − B’ means ‘A is the wife of B’; ‘A × B’ means ‘A is the father of B’; ‘A ÷ B’ means ‘A is the sister of B’.<br>If ‘S + T × U ÷ V’, how is S related to V?",["Father","Daughter","Father’s sister","Brother"],"D"],
+["What will come in place of ‘?’ if ‘+’ and ‘−’ are interchanged and ‘×’ and ‘÷’ are interchanged?<br>162 ÷ 9 − 132 × 11 + 7 = ?",["141","147","153","157"],"B"],
+["Select the pair which follows the same pattern as the two pairs given: RVN : SQO and KPM : LOQ.",["WVZ – XYJ","IMS – EOR","TVW – XLW","POT – KMG"],"A"],
+["Read the statements and conclusions carefully. Assuming the statements are true, decide which conclusion(s) logically follow.<br><b>Statements:</b> Some clays are chairs. All chairs are wood. All wood is round.<br><b>Conclusions:</b> (I) No wood is a clay. (II) Some round are clays and chairs.",["None of the conclusion follows","Both conclusion I and II follow","Only conclusion I follows","Only conclusion II follows"],"D"],
+["Three of the following four are alike in a certain way and form a group. Which one does NOT belong?",["362","275","314","554"],"B"],
+["How many triangles are there in the given figure?",["11","10","9","8"],"A","[Figure: overlapping squares with diagonals creating triangular quadrants. Not reproduced.]"],
+["Select the correct mirror image of the given text when the mirror MN is placed horizontally underneath.<br>Given: RTYZXCS7",["Option A","Option B","Option C","Option D"],"D","[Figure-based question. Options not reproduced.]"],
+["In a certain code language, ERSAT is coded as 2364 and POLIS is coded as 4327. What is the code for N?",["2","3","4","7"],"A"],
+["In a certain code language, ‘strong and mighty’ is written as ‘xo ya la’ and ‘well and strong’ is written as ‘ha la ma’. How is ‘strong’ written in that language?",["xo","la","ya","ma"],"B"],
+["What would be the number on the opposite side of ‘4’ if the given sheet is folded to form a cube?",["6","2","5","3"],"B","[Net showing faces numbered 6, 2, 3, 5, 4, 1. Figure not reproduced.]"]
+]});
+
+S.push({title:"Quantitative Aptitude", qs:[
+["Radhika’s salary was decreased by 30% and subsequently increased by 30%. How much per cent did he lose?",["25%","60%","15%","20%"],"C"],
+["Simplify the following expression.<br>3 + 28 + 11 × 24 − 4 × 3 ÷ 4",["39","29","30","7"],"C"],
+["A motorcycle covers the first 45 km at an average speed of 60 km/h. The speed for the remaining 50 km was 45 km/h. The overall average speed was:",["52 km/h","42½ km/h","47¼ km/h","62½ km/h"],"C"],
+["A shopkeeper decides to mark up the price of an article by 45%. What percentage discount should he allow to be able to sell the article at the original price?",["26¼%","24<sup>8</sup>⁄<sub>29</sub>%","31<sup>1</sup>⁄<sub>29</sub>%","39¼%"],"C"],
+["The largest possible sphere is carved from a cube of side 14 cm. What is its volume in cm³?",["1430⅔","1437⅓","785⅓","1797⅓"],"B"],
+["A and B can do a work in 15 days and 30 days, respectively. How long will they take together to complete the work?",["12 days","8 days","15 days","10 days"],"D"],
+["A company has five plants for manufacturing spare parts. Each plant manufactures local quality and export quality. What is the ratio of local to export quality units of the highest manufacturing plant?",["2 : 11","4 : 7","11 : 7","7 : 11"],"D","[Graph of manufacturing capacity of 5 plants not reproduced.]"],
+["Which of the following is a correct statement?",["The sum of the angles of a cyclic quadrilateral is always 180°.","Equal chords are equidistant from the centre of the circle and subtend equal angles at the centre.","If two circles touch each other, the point of contact lies on the line joining the centres.","Angles subtended by an arc at the same segment of the circle are in the ratio 2 : 1."],"B"],
+["Radhika repurchased the car of a friend at a cost of ₹3,145. C sold it to a person at 10% profit. What is the cost price of the used car for the first owner?",["125","145","140","135"],"A","(Question text as in source; wording appears garbled.)"],
+["The percentage of students enrolled in different activities in a school is shown in the left pie chart. The total number of students is 3000. In the right pie chart, the total number of girls is 1750, with their percentage breakup across activities (Swimming, Craft, Dramatics, Painting, Singing). The number of girls enrolled in Craft forms what per cent of the total number of students in the school?",["4.67%","5.67%","8.42%","7.75%"],"A","[Pie charts not reproduced.]"],
+["In how many years will the simple interest on a sum of money be equal to the principal at the rate of 2<sup>7</sup>⁄<sub>10</sub>% per annum?",["32 years","34 years","35 years","37 years"],"D"],
+["The perimeters of two similar triangles ABC and PQR are 64 cm and 48 cm, respectively, and PR = 9 cm. What is the length of the side AC of triangle ABC?",["16 cm","14 cm","12 cm","18 cm"],"C","(Question text adapted from garbled source.)"],
+["A man spent 60% of his salary on household expenses, 20% on rent, and out of the remaining salary he invested 80% in a mutual fund. He is left with ₹24,000. Find his salary.",["₹4,00,000","₹5,00,000","₹6,50,000","₹6,00,000"],"D"],
+["A shopkeeper marks up the price of oil by 50% and uses a faulty machine which measures 20% less. If the shopkeeper gives a discount of 32%, the overall profit percentage is:",["15% Loss","25% Profit","18% Loss","27% Profit"],"D"],
+["If the equation of a line is x + 7y = 1 and that of another line is x = y + 4, what are the coordinates of the point nearest to the origin on the line?",["(7, 1)","(0, 4)","(4, 1)","(1, 4)"],"C","(Question text as in source; wording appears garbled.)"],
+["Study the given pie-charts and answer the question. (Students’ progress after graduation: Self-Employment 14%, Corporate Job 36%, Unemployed 26%, Higher Studies 24%.) Which two combined have the same number of students as the other?",["H.S. + H.Ed.","Entrepreneur + H.Ed.","Entrepreneur + P.C.","P.C. + H.Ed."],"B","[Pie charts not reproduced.]"],
+["What will be the least value of x so that the 8-digit number 415x6742 becomes divisible by 9?",["7","4","8","9"],"A"],
+["The ratio of the diameters of two spheres is 5 : 4. The larger sphere is melted and 178 identical spheres are made from it. The smaller sphere is melted and ‘B’ identical spheres are made from it. If the ratio of the volume of each of the 178 spheres to the volume of each of the ‘B’ spheres is 1 : m, what is the value of m?",["<sup>1728</sup>⁄<sub>125</sub>","<sup>17</sup>⁄<sub>6400</sub>","<sup>125</sup>⁄<sub>1728</sub>","<sup>64</sup>⁄<sub>3375</sub>"],"B"],
+["If PA and PB are the two tangents to a circle with centre O, and ∠APB = 70°, then ∠APO is equal to:",["40°","35°","55°","45°"],"B"],
+["A man walking at 9 km/h covers a certain distance in 4 hours 20 minutes. If he travels the same distance by cycle in 2 hours 50 minutes, the speed of the cycle in km/h is:",["7<sup>12</sup>⁄<sub>17</sub>","6<sup>11</sup>⁄<sub>17</sub>","5<sup>12</sup>⁄<sub>17</sub>","8<sup>11</sup>⁄<sub>17</sub>"],"A","(Question text adapted from garbled source.)"],
+["Two parallel chords on the same side of the centre of a circle are 12 cm and 16 cm long, and the radius of the circle is 5√13 cm. What is the distance between the chords?",["4 cm","1 cm","3 cm","2 cm"],"D"],
+["The surface area of a cube is 486 cm². Find its volume.",["490 cm³","729 cm³","629 cm³","512 cm³"],"B"],
+["In right-angled triangle ABC, ∠B = 90° and angles A and C are acute. If cosec A = 2√2, find the value of sin A · cos C + cos A · sin C.",["2√2","<sup>1</sup>⁄<sub>2√2</sub>","1","<sup>√7</sup>⁄<sub>2√2</sub>"],"C"],
+["A motorcycle dealer’s sales rose 12% in the first year compared to the base year and fell 15% in the second year, with total sales of 91,800 in the second year. What were the sales at the start?",["99,20,729","1,00,000","91,73,440","99,24,000"],"B","(Question text adapted from garbled source.)"],
+["The table shows the percentage of marks obtained by 5 students in different subjects (maximum marks in brackets). What are the marks (in percentage) obtained by Mohan?",["71.5%","76.5%","78.2%","75.5%"],"A",
+ "<table><tr><th>Student</th><th>Physics (100)</th><th>Maths (150)</th><th>Music (50)</th><th>Hindi (100)</th><th>Botany (100)</th></tr>"+
+ "<tr><td>Ram</td><td>80</td><td>80</td><td>84</td><td>50</td><td>85</td></tr>"+
+ "<tr><td>Shyam</td><td>70</td><td>70</td><td>68</td><td>70</td><td>45</td></tr>"+
+ "<tr><td>Rohan</td><td>90</td><td>90</td><td>72</td><td>80</td><td>70</td></tr>"+
+ "<tr><td>Mohan</td><td>60</td><td>60</td><td>64</td><td>60</td><td>65</td></tr>"+
+ "<tr><td>Sohan</td><td>90</td><td>50</td><td>70</td><td>85</td><td>80</td></tr></table>"]
+]});
+
+S.push({title:"General Awareness", qs:[
+["The Average function is listed in the drop-down menu of which of the following tools?",["Financial function","Auto Sum function","Move function","Insert function"],"B"],
+["Where can you find the emoticons in an instant messaging conversation window?",["At the middle of the chat window","Any where in the chat window","At the bottom of the chat window","At the top of the chat window"],"C"],
+["Who has the power to regulate the right of citizenship in India?",["Supreme Court","President","Governor","Parliament"],"D"],
+["In which year did India host the Asian Games for the first time?",["1948","1951","1950","1949"],"B"],
+["Who among the following was the author of ‘Brihat Katha Kosh’?",["Dandin","Harisena","Kshemendra","Bhavabhuti"],"B"],
+["Langvir Nritya is a folk dance from the state of ______?",["Haryana","Gujarat","Uttar Pradesh","Uttarakhand"],"D"],
+["Geoid is the ______ of earth.",["shape","axis","colour","orbit"],"A"],
+["In the context of DNA, which of the following principles governs the process of transcription?",["The transforming principle","The principle of complementarity","Semiconservative nature of DNA","The principle of inheritance"],"B"],
+["With which of the following states is the Bhatiali folk music, mostly sung by fishermen, associated?",["West Bengal","Odisha","Andhra Pradesh","Kerala"],"A"],
+["Who was the founder of Arya Samaj?",["Rabindranath Tagore","Dayanand Saraswati","Keshub Chandra Sen","Swami Vivekananda"],"B"],
+["Daler Mehndi is primarily a famous singer of pop songs in which Indian language?",["English","Punjabi","Hindi","Bengali"],"B"],
+["The five-year plans for India with their duration are given below. Which of the following is correctly matched?",["Both a and c","Both b and c","Only a","Both a and b"],"D",
+ "<table><tr><th>Plan</th><th>Duration</th></tr><tr><td>(a) Second five-year plan</td><td>1956-57 to 1960-61</td></tr><tr><td>(b) Third five-year plan</td><td>1961-62 to 1965-66</td></tr><tr><td>(c) Fourth five-year plan</td><td>1966-67 to 1970-71</td></tr></table>"],
+["Which of the following states/UTs has the first 100% fully digital literate Panchayat in India?",["Delhi","Puducherry","Maharashtra","Kerala"],"D"],
+["Former minister of the state and former president of BJP alliance partner IPFT ______ received the Padma Shri award (posthumously) in 2023.",["Prabhat Choudhury","Narendra Chandra Debbarma","Rebati Mohan Das","Pinaki Das Chowdhury"],"B"],
+["Sakewa is a religious festival celebrated by the Kirat Khambu Rai community of ______.",["Arunachal Pradesh","Sikkim","Himachal Pradesh","Goa"],"B"],
+["The growth rate of India’s population has been declining since ______.",["1971","1991","1951","1981"],"D"],
+["As of March 2024, who among the following is the Chairperson of the National Green Tribunal?",["Lokeshwar Singh Panta","Prakash Shrivastava","Ajay Narayan Jha","Swatanter Kumar"],"B"],
+["According to the Census of India 2011, most people had out-migrated from ______ to other states in India.",["Uttar Pradesh and Bihar","Rajasthan and Gujarat","Uttar Pradesh and Madhya Pradesh","Maharashtra and Gujarat"],"A"],
+["National Institute of Mountaineering and Adventure Sports (NIMAS) is located at ______.",["Mizoram","Nagaland","Himachal Pradesh","Arunachal Pradesh"],"D"],
+["How many squares are there on a chessboard?",["69","67","68","64"],"D"],
+["In which part of the Constitution will you find the six broad categories of Fundamental Rights?",["Part II","Part III","Part IV","Part I"],"B"],
+["The financial year in India starts from 1<sup>st</sup> April and ends on ______.",["30<sup>th</sup> June","31<sup>st</sup> March","31<sup>st</sup> July","31<sup>st</sup> May"],"B"],
+["What is the balance of trade of a country?",["Ratio of international trade","Number of exports","Difference between imports and exports","Number of imports"],"C"],
+["The peninsular plateau of India was a part of which continent earlier?",["South America","Europe","Africa","North America"],"C"],
+["In which year did Johannes Nicolaus Brønsted and Thomas Martin Lowry propose the fundamental concept of acids and bases?",["1928","1921","1925","1923"],"D"]
+]});
+
+
+var L=["A","B","C","D"], mode="study", cur=0, ans={}, submitted=false, left=3600, tm=null;
+function k(s,i){return s+"-"+i}
+function revealed(s,i){return submitted||(mode==="study"&&ans[k(s,i)])}
+function setMode(m){
+  mode=m;ans={};submitted=false;clearInterval(tm);left=3600;
+  document.getElementById("bStudy").className="btn"+(m==="study"?" on":"");
+  document.getElementById("bTest").className="btn"+(m==="test"?" on":"");
+  document.getElementById("bSub").style.display=m==="test"?"":"none";
+  document.getElementById("timer").textContent="";
+  if(m==="test"){tick();tm=setInterval(tick,1000)}
+  document.getElementById("score").innerHTML="";
+  render();
+}
+function tick(){
+  var mm=Math.floor(left/60),ss=left%60;
+  document.getElementById("timer").textContent="⏱ "+mm+":"+(ss<10?"0":"")+ss;
+  if(left<=0){submitTest();return}
+  left--;
+}
+function pick(s,i,l){
+  if(submitted)return;
+  if(mode==="study"&&ans[k(s,i)])return;
+  ans[k(s,i)]=l;render();
+}
+function showSec(n){cur=n;render();window.scrollTo(0,0)}
+function go(d){var n=cur+d;if(n>=0&&n<S.length)showSec(n)}
+function submitTest(){
+  if(submitted)return;
+  submitted=true;clearInterval(tm);
+  document.getElementById("timer").textContent="Submitted";
+  var rows="",tc=0,tw=0,tm_=0;
+  S.forEach(function(sec,si){
+    var c=0,w=0;
+    sec.qs.forEach(function(q,i){var a=ans[k(si,i)];if(a){if(a===q[2])c++;else w++}});
+    var m=c*2-w*0.5;tc+=c;tw+=w;tm_+=m;
+    rows+="<tr><td>"+sec.title+"</td><td>"+c+"</td><td>"+w+"</td><td>"+(sec.qs.length-c-w)+"</td><td>"+m+"</td></tr>";
+  });
+  document.getElementById("score").innerHTML='<div class="score"><h2>Result: '+tm_+' / 200</h2><table><tr><th>Section</th><th>Correct</th><th>Wrong</th><th>Skipped</th><th>Marks</th></tr>'+rows+'<tr><th>Total</th><th>'+tc+'</th><th>'+tw+'</th><th>'+(100-tc-tw)+'</th><th>'+tm_+'</th></tr></table></div>';
+  render();window.scrollTo(0,0);
+}
+function render(){
+  var t="";
+  S.forEach(function(sec,i){t+='<button class="'+(i===cur?"act":"")+'" onclick="showSec('+i+')">'+sec.title+'</button>'});
+  document.getElementById("tabs").innerHTML=t;
+  var sec=S[cur],p="",h="";
+  sec.qs.forEach(function(q,i){
+    var a=ans[k(cur,i)],cls="";
+    if(a){cls="sel";if(revealed(cur,i))cls=a===q[2]?"c":"w"}
+    p+='<a href="#q'+i+'" class="'+cls+'">'+(i+1)+'</a>';
+    var r=revealed(cur,i);
+    if(q[4])h+='<div class="passage">'+q[4]+'</div>';
+    h+='<div class="card" id="q'+i+'"><div class="qn">Q.'+(i+1)+'</div><div class="qt">'+q[0]+'</div>';
+    if(q[3])h+=q[3].charAt(0)==="<"?q[3]:'<div class="note">'+q[3]+'</div>';
+    q[1].forEach(function(o,j){
+      var c="opt",l=L[j];
+      if(r){if(l===q[2])c+=" right";else if(l===a)c+=" wrong"}
+      else if(l===a)c+=" sel";
+      h+='<button class="'+c+'" '+(r?"disabled":"")+' onclick="pick('+cur+','+i+',\''+l+'\')">'+l+') '+o+'</button>';
+    });
+    if(r){
+      h+=a?(a===q[2]?'<div class="res ok">✔ Correct</div>':'<div class="res no">✘ Wrong. Correct answer: '+q[2]+'</div>'):'<div class="res no">Not attempted. Correct answer: '+q[2]+'</div>';
+    }
+    h+='</div>';
+  });
+  document.getElementById("pal").innerHTML=p;
+  document.getElementById("qs").innerHTML=h;
+}
+render();
+</script>
+</body>
+</html>
